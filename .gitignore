@@ -122,6 +122,12 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# Ignore VS Code Port Numbers
+.vscode/
+
+# Ignore Apple Hidden File
+.DS_Store
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged

@@ -5,6 +5,7 @@
 // variable declaration
 let map;
 
+// FUNCTION TO CREATE INITIAL MAP
 async function initMap() {
 // cleveland cords 
   const position = { lat: 41.4993, lng: -81.6944 };
@@ -22,3 +23,28 @@ async function initMap() {
 }
 
 initMap();
+
+// Function to handle form submission and location search
+function handleLocationSearch() {
+    // Implementation to search for a location and retrieve sunset data
+}
+
+// Function to display current and future sunset times
+function displaySunsetTimes(location, sunsetData) {
+    // Implementation to display current and future sunset times
+}
+
+// Function to display tomorrow's sunset times
+function displayTomorrowsSunset(location, sunsetData) {
+    // Implementation to display tomorrow's sunset times
+}
+
+// Function to display sunset calendar
+function displaySunsetCalendar(location, sunsetCalendarData) {
+    // Implementation to display sunset calendar for the next 45 days
+}
+
+// Function to toggle between light and dark mode
+function toggleDisplayMode(mode) {
+    // Implementation to switch between light and dark mode
+}

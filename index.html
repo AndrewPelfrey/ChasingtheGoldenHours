@@ -19,7 +19,7 @@
           Sun Icon
         </div>
         <div id="headerCenter">
-          <h1>Chasing the Golden Hour</h1>
+          <h1 class="is-">Chasing the Golden Hour</h1>
         </div>
         <div id="headerRight">
           Dark Mode Button
@@ -34,10 +34,26 @@
     <section>
       <aside>
         <p>Current Time:</p>
+
+        <button class="button is-primary" id="openModal">Open Modal</button>
+
+        <div id="myModal" class="modal">
+          <div class="modal-background"></div>
+            <div class="modal-content">
+              <div class="box">
+                <p>Simply enter a current location and desired city, 
+                  and it provides the sunset time, directions to the viewing 
+                  spot, and whether you can make it there in time. Never 
+                  miss the perfect sunset moment again.</p>
+              </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close" id="closeModal"></button>
+        </div><br>
+
         <!-- Example form: Will need updated -->
         <input type="text"><br>
         <input type="text"><br>
-        <button type="submit">Submit Button</button>
+        <button class="button" type="submit">Submit Button</button>
       </aside>
 
       <main>

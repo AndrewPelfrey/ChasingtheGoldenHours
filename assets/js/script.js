@@ -21,4 +21,20 @@ async function initMap() {
 
 }
 
+
+const openModalButton = document.getElementById('openModal');
+const closeModalButton = document.getElementById('closeModal');
+const modal = document.getElementById('myModal');
+
+openModalButton.addEventListener('click', function() {
+    modal.classList.add('is-active');
+  });
+
+closeModalButton.addEventListener('click', function() {
+    modal.classList.remove('is-active');
+  });
+
+
+
+
 initMap();

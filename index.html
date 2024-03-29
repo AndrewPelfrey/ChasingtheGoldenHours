@@ -29,23 +29,22 @@
         </div>
       </div>
         <div class="subtitle">
-            <p>Your go-to web app for sunset enthusiasts and photographers.</p>
-            <p>Simply enter a city, and it provides the sunset time, directions to the viewing spot, 
-            and whether you can make it there in time. Never miss the perfect sunset moment again.</p>
+            <h2>Your go-to web app for sunset enthusiasts and photographers.</h2>
         </div>
     </header>
 
     <section>
       <aside>
-        <p>Current Time:</p>
+        <h3>Current Time:</h3>
 
-        <button class="button is-primary" id="openModal">Open Modal</button>
+        <button class="button is-primary" id="openModal">How to Use</button>
 
         <div id="myModal" class="modal">
           <div class="modal-background"></div>
             <div class="modal-content">
               <div class="box">
                 <h3>HOW TO USE THIS APP:</h3>
+                <br/>
                 <p>Simply enter a current location and desired city, 
                   and it provides the sunset time, directions to the viewing 
                   spot, and whether you can make it there in time. Never 
@@ -56,9 +55,9 @@
         </div><br>
 
         <!-- Example form: Will need updated -->
-        <input type="text"><br>
-        <input type="text"><br>
-        <button type="submit">Submit Button</button>
+        <input id="current-location-input" type="text" placeholder="Current Location"><br>
+        <input id="desired-location-input" type="text" placeholder="Desired Location"><br>
+        <button id="submit" type="submit">Submit Button</button>
       </aside>
 
       <main>

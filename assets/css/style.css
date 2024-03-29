@@ -1,9 +1,55 @@
+/* Bulma Light and Dark Mode Themes */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary: #005f73;
+        --secondary:  #EE9B00;
+        --rich-black: #001219;
+        --auburn: #9B2226;
+        --rufous: #AE2012;
+        --rust: #BB3E03;
+        --alloy-orange: #CA6702;
+        --columbia-blue: #C0D7DC;
+        --alice-blue: #E0EBEE;
+        --white: #ffffff;
+    }
+  }
+  
+  [data-theme=dark],
+  .dark-theme {
+        --primary: #EE9B00;
+        --secondary:  #005f73;
+        --rich-black: #ffffff;
+        --auburn: #E0EBEE;
+        --rufous: #C0D7DC;
+        --rust: #CA6702;
+        --alloy-orange: #BB3E03;
+        --columbia-blue: #AE2012;
+        --alice-blue: #9B2226;
+        --white: #001219;
+  }
+
+
+h1, h2, h3 {
+    margin: 5px;
+    padding: 10px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
 #headerDiv {
+    margin: auto 0;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
+    background-color: var(--columbia-blue);
+    color: var(--rich-black);
 }
 
 header .subtitle {
+    margin: 0;
+    padding: 20px;
+    background-color: var(--alice-blue);
+    color: var(--rich-black);
     text-align: center;
 }
 
@@ -12,16 +58,44 @@ header .subtitle {
 }
 
 section {
+    margin: auto 0;
+    padding: 20px;
     display: flex;
     justify-content: space-around;
+    background-color: var(--alice-blue);
+    color: var(--rich-black)
 }
 
 aside {
+    margin: auto 0;
+    padding: 20px;
     flex-grow: 1;
     flex-basis: 30%;
+    background-color: var(--alloy-orange);
+    text-align: center;
+}
+
+#current-location-input, #desired-location-input {
+    margin: 20px;
+    padding: 10px 50px 10px 50px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#submit {
+    margin: 10px;
+    padding: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    border: 3px solid var(--secondary);
+    background-color: var(--primary);
+    color: var(--white);
 }
 
 main {
+    margin: auto 0;
+    padding: 20px;
+    color: var(--rich-black);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -45,6 +119,19 @@ footer {
 }
 
 #footerDiv {
+    margin: auto 0;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
+    background-color: var(--columbia-blue);
+    color: var(--rich-black);
 }
+
+ /* Hide the input box */
+ /* #datepicker {
+    display: none;
+  } */
+
+  .ui-datepicker-header {
+    width: 100%;
+  }

@@ -21,7 +21,7 @@ async function initMap() {
   });
 
 }
-
+// JS for Bulma Modal
 const openModalButton = document.getElementById('openModal');
 const closeModalButton = document.getElementById('closeModal');
 const modal = document.getElementById('myModal');
@@ -34,29 +34,57 @@ closeModalButton.addEventListener('click', function() {
     modal.classList.remove('is-active');
   });
 
+
 initMap();
 
 // Function to handle form submission and location search
 function handleLocationSearch() {
-    // Implementation to search for a location and retrieve sunset data
+  // Implementation to search for a location and retrieve sunset data
 }
 
 // Function to display current and future sunset times
 function displaySunsetTimes(location, sunsetData) {
-    // Implementation to display current and future sunset times
+  // Implementation to display current and future sunset times
 }
 
 // Function to display tomorrow's sunset times
 function displayTomorrowsSunset(location, sunsetData) {
-    // Implementation to display tomorrow's sunset times
+  // Implementation to display tomorrow's sunset times
 }
 
 // Function to display sunset calendar
 function displaySunsetCalendar(location, sunsetCalendarData) {
-    // Implementation to display sunset calendar for the next 45 days
+  // Implementation to display sunset calendar for the next 45 days
 }
 
 // Function to toggle between light and dark mode
-function toggleDisplayMode(mode) {
-    // Implementation to switch between light and dark mode
-}
+const themeSwitcher = document.getElementById("theme-switcher");
+    themeSwitcher.addEventListener("change", function() {
+        if (this.checked) {
+            document.documentElement.classList.add("dark-theme");
+        } else {
+            document.documentElement.classList.remove("dark-theme");
+        }
+    });
+
+
+
+// adding current time stamp
+const currentTime = dayjs().format(`h:mm A`);
+$(`#timeStamp`).text(`Current Time: ` + currentTime);
+// console.log(currentTime);
+
+// adding a calendar modal
+// $(document).ready(function() {
+//   $('#datepicker').datepicker({
+//     dateFormat: 'mm-dd', 
+//     changeMonth: true,  
+//   });
+// });
+$(document).ready(function() {
+  $('<div id="datepicker"></div>').insertAfter('label[for="datepicker"]').datepicker();
+});
+
+// $(document).ready(function() {
+//   $('#datepickerContainer').datepicker();
+// });

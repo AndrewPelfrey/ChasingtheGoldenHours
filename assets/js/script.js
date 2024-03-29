@@ -20,8 +20,24 @@ async function initMap() {
   });
 
 }
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 // JS for Bulma Modal
+=======
+
+// JS for Bulma Modal
+const openModalButton = document.getElementById('openModal');
+const closeModalButton = document.getElementById('closeModal');
+const modal = document.getElementById('myModal');
+
+openModalButton.addEventListener('click', function() {
+    modal.classList.add('is-active');
+  });
+
+closeModalButton.addEventListener('click', function() {
+    modal.classList.remove('is-active');
+  });
+>>>>>>> 0398848c91848d12ce3090c7b1c7a9144ddcef99
 
 initMap();
 
@@ -53,6 +69,7 @@ const themeSwitcher = document.getElementById("theme-switcher");
         } else {
             document.documentElement.classList.remove("dark-theme");
         }
+<<<<<<< HEAD
     });
 =======
 
@@ -224,3 +241,6 @@ $(document).ready(function() {
     });
   });
 >>>>>>> Stashed changes
+=======
+    });
+>>>>>>> 0398848c91848d12ce3090c7b1c7a9144ddcef99

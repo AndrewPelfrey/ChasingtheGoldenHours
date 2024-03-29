@@ -1,4 +1,19 @@
 /* Bulma Light and Dark Mode Themes */
+/* IMPORTANT ROOT: Creates the default styling across browsers on page load */
+:root {
+    --primary: #005f73;
+    --secondary:  #EE9B00;
+    --rich-black: #001219;
+    --auburn: #9B2226;
+    --rufous: #AE2012;
+    --rust: #BB3E03;
+    --alloy-orange: #CA6702;
+    --columbia-blue: #C0D7DC;
+    --alice-blue: #E0EBEE;
+    --white: #ffffff;
+}
+
+/* Creates a dark/light mode that can be switched and enabled through JS with user checkbox. */
 @media (prefers-color-scheme: dark) {
     :root {
         --primary: #005f73;
@@ -14,6 +29,7 @@
     }
   }
   
+  /* Creates a darktheme when switch is activated */
   [data-theme=dark],
   .dark-theme {
         --primary: #EE9B00;

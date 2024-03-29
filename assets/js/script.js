@@ -20,6 +20,7 @@ async function initMap() {
   });
 
 }
+<<<<<<< Updated upstream
 // JS for Bulma Modal
 
 initMap();
@@ -53,6 +54,144 @@ const themeSwitcher = document.getElementById("theme-switcher");
             document.documentElement.classList.remove("dark-theme");
         }
     });
+=======
+
+initMap();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
 
 
@@ -61,6 +200,7 @@ const currentTime = dayjs().format(`h:mm A`);
 $(`#timeStamp`).text(`Current Time: ` + currentTime);
 // console.log(currentTime);
 
+<<<<<<< Updated upstream
 // adding a calendar modal
 // $(document).ready(function() {
 //   $('#datepicker').datepicker({
@@ -75,3 +215,12 @@ $(document).ready(function() {
 // $(document).ready(function() {
 //   $('#datepickerContainer').datepicker();
 // });
+=======
+$(document).ready(function() {
+    $('#datepicker').datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeMonth: true, 
+      changeYear: true 
+    });
+  });
+>>>>>>> Stashed changes

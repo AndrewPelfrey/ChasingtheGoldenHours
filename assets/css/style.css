@@ -126,17 +126,7 @@ footer {
     background-color: var(--columbia-blue);
     color: var(--rich-black);
 }
-
- 
-
-
-
-
-
-
-
-
-
-  .ui-datepicker-header {
+  
+.ui-datepicker-header {
     width: 100%;
-  }
+}

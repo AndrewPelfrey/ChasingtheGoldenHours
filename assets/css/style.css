@@ -7,6 +7,10 @@ header .subtitle {
     text-align: center;
 }
 
+.icon-style {
+    color: yellow;
+}
+
 section {
     display: flex;
     justify-content: space-around;

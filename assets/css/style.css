@@ -28,6 +28,14 @@
         --white: #001219;
   }
 
+
+h1, h2, h3 {
+    margin: 5px;
+    padding: 10px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
 #headerDiv {
     margin: auto 0;
     padding: 20px;
@@ -64,6 +72,24 @@ aside {
     flex-grow: 1;
     flex-basis: 30%;
     background-color: var(--alloy-orange);
+    text-align: center;
+}
+
+#current-location-input, #desired-location-input {
+    margin: 20px;
+    padding: 10px 50px 10px 50px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#submit {
+    margin: 10px;
+    padding: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    border: 3px solid var(--secondary);
+    background-color: var(--primary);
+    color: var(--white);
 }
 
 main {

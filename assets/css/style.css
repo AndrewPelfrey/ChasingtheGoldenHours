@@ -123,6 +123,7 @@ footer {
     padding: 20px;
     display: flex;
     justify-content: space-between;
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 }
 
@@ -132,3 +133,8 @@ footer {
     color: var(--rich-black);
 }
 >>>>>>> 0398848c91848d12ce3090c7b1c7a9144ddcef99
+=======
+}
+
+
+>>>>>>> Stashed changes

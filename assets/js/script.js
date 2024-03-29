@@ -25,6 +25,7 @@ async function initMap() {
 // JS for Bulma Modal
 =======
 
+<<<<<<< Updated upstream
 // JS for Bulma Modal
 const openModalButton = document.getElementById('openModal');
 const closeModalButton = document.getElementById('closeModal');
@@ -74,134 +75,8 @@ const themeSwitcher = document.getElementById("theme-switcher");
 =======
 
 initMap();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+=======
+initMap();
 
 
 
@@ -212,11 +87,150 @@ initMap();
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<<<<<<< Updated upstream
+
+
+
+>>>>>>> Stashed changes
+
+
+
+=======
+>>>>>>> Stashed changes
 // adding current time stamp
 const currentTime = dayjs().format(`h:mm A`);
 $(`#timeStamp`).text(`Current Time: ` + currentTime);
 // console.log(currentTime);
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 // adding a calendar modal
 // $(document).ready(function() {
@@ -233,14 +247,20 @@ $(document).ready(function() {
 //   $('#datepickerContainer').datepicker();
 // });
 =======
+=======
+>>>>>>> Stashed changes
 $(document).ready(function() {
     $('#datepicker').datepicker({
       dateFormat: 'yy-mm-dd',
       changeMonth: true, 
       changeYear: true 
     });
+<<<<<<< Updated upstream
   });
 >>>>>>> Stashed changes
 =======
     });
 >>>>>>> 0398848c91848d12ce3090c7b1c7a9144ddcef99
+=======
+  });
+>>>>>>> Stashed changes

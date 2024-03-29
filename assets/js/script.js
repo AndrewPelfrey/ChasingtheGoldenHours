@@ -22,6 +22,7 @@ async function initMap() {
 
 }
 
+// JS for Bulma Modal
 const openModalButton = document.getElementById('openModal');
 const closeModalButton = document.getElementById('closeModal');
 const modal = document.getElementById('myModal');
@@ -57,6 +58,11 @@ function displaySunsetCalendar(location, sunsetCalendarData) {
 }
 
 // Function to toggle between light and dark mode
-function toggleDisplayMode(mode) {
-    // Implementation to switch between light and dark mode
-}
+const themeSwitcher = document.getElementById("theme-switcher");
+    themeSwitcher.addEventListener("change", function() {
+        if (this.checked) {
+            document.documentElement.classList.add("dark-theme");
+        } else {
+            document.documentElement.classList.remove("dark-theme");
+        }
+    });

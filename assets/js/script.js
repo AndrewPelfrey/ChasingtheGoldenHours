@@ -5,7 +5,6 @@
 // variable declaration
 let map;
 
-// FUNCTION TO CREATE INITIAL MAP
 async function initMap() {
 // cleveland cords 
   const position = { lat: 41.4993, lng: -81.6944 };
@@ -22,18 +21,6 @@ async function initMap() {
 
 }
 // JS for Bulma Modal
-const openModalButton = document.getElementById('openModal');
-const closeModalButton = document.getElementById('closeModal');
-const modal = document.getElementById('myModal');
-
-openModalButton.addEventListener('click', function() {
-    modal.classList.add('is-active');
-  });
-
-closeModalButton.addEventListener('click', function() {
-    modal.classList.remove('is-active');
-  });
-
 
 initMap();
 

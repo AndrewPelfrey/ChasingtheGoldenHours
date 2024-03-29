@@ -123,10 +123,6 @@ footer {
     padding: 20px;
     display: flex;
     justify-content: space-between;
-    background-color: var(--columbia-blue);
-    color: var(--rich-black);
 }
-  
-.ui-datepicker-header {
-    width: 100%;
-}
+
+

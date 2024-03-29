@@ -11,7 +11,7 @@ header .subtitle {
     color: yellow;
 }
 
-section {
+#mainContent {
     display: flex;
     justify-content: space-around;
 }

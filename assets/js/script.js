@@ -43,9 +43,34 @@ function handleLocationSearch(event) {
 }
 
 // Function to display current and future sunset times
-function displaySunsetTimes(location, sunsetData) {
-  // Implementation to display current and future sunset times
+function getSunsetTime(latitude, longitude, date) {
+  const apiUrl = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=${date}&formatted=0`;
+
+  fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+          const sunset = new Date(data.results.sunset);
+
+          const options = {
+              timeZone: 'America/New_York',
+              hour: 'numeric',
+              minute: 'numeric',
+              second: 'numeric'
+          };
+
+          const sunsetTime = sunset.toLocaleTimeString('en-US', options);
+
+          const sunsetElement = document.getElementById('sunset-time');
+          sunsetElement.innerHTML = `<p>Sunset time (Eastern Time): ${sunsetTime}</p>`;
+      })
+      .catch(error => console.error('Error fetching sunset time:', error));
 }
+
+const latitude = 41.4993; // Latitude of Cleveland
+const longitude = -81.6944; // Longitude of Cleveland
+const date = '2024-04-02'; // Date
+
+getSunsetTime(latitude, longitude, date);
 
 // Function to display tomorrow's sunset times
 function displayTomorrowsSunset(location, sunsetData) {

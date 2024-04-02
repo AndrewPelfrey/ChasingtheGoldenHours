@@ -18,14 +18,14 @@
 
 <body>
     <header>
-      <div id="headerDiv">
+      <div id="headerDiv" class="is-flex is-justify-content-space-between">
       <!-- Header-Left and Header-Right might not show on mobile -->
         <div id="headerLeft">
             <i class="fas fa-sun fa-3x icon-style"></i>
           
         </div>
         <div id="headerCenter">
-          <p class="is-size-2">Chasing the Golden Hour</p>
+          <p class="has-text-centered is-size-2">Chasing the Golden Hours</p>
         </div>
         <div id="headerRight">
             <label for="theme-switcher">Dark mode</label>
@@ -37,70 +37,86 @@
         </div>
     </header>
 
-    <section>
-      <aside>
-        <h3 id="timeStamp">Current Time:</h3>
+    <section class="main-section">
+        <div class="columns">
+        <aside class="column is-full-mobile is-one-full-tablet is-one-third-desktop">
+            <h3 id="timeStamp">Current Time:</h3>
 
-        <button class="button is-primary" id="openModal">How to Use This App</button>
+            <button class="button is-primary" id="openModal">How to Use This App</button>
 
-        <div id="myModal" class="modal">
-          <div class="modal-background"></div>
-            <div class="modal-content">
-              <div class="box">
-                <h3>HOW TO USE THIS APP:</h3>
-                <p id="modal-paragraph">Simply enter a current location and desired city, 
-                  and it provides the sunset time, directions to the viewing 
-                  spot, and whether you can make it there in time. Never 
-                  miss the perfect sunset moment again.</p>
-              </div>
+            <div id="myModal" class="modal">
+            <div class="modal-background"></div>
+                <div class="modal-content">
+                <div class="box">
+                    <h3>HOW TO USE THIS APP:</h3>
+                    <p id="modal-paragraph">Simply enter a current location and desired city, 
+                    and it provides the sunset time, directions to the viewing 
+                    spot, and whether you can make it there in time. Never 
+                    miss the perfect sunset moment again.</p>
+                </div>
+                </div>
+                <button class="modal-close is-large" aria-label="close" id="closeModal"></button>
+            </div><br>
+        
+            <!-- Example form: Will need updated -->
+            <form id="location-form">
+              <input id="current-location-input" type="text" placeholder="Current Location"><br>
+              <input id="desired-location-input" type="text" placeholder="Desired Location"><br>
+              <button id="submit" type="submit">Submit Button</button>
+            </form>
+        </aside>
+
+        <main>
+            <div class="sunset-container column is-full-mobile is-one-half-tablet is-one-half-desktop">
+                <h2 class="is-size-4">Todays Sunset:</h2>
+            <div id="sunset-time" class="column box-container">
+                <h3>Sunset Time:</h3>
             </div>
-            <button class="modal-close is-large" aria-label="close" id="closeModal"></button>
-        </div><br>
-    
-        <!-- Example form: Will need updated -->
-        <form id="location-form">
-          <input id="current-location-input" type="text" placeholder="Current Location"><br>
-          <input id="desired-location-input" type="text" placeholder="Desired Location"><br>
-          <button id="submit" type="submit">Submit Button</button>
-        </form>
-      </aside>
-
-      <main>
-        <div class="sunset-container" id="sunset-time">
-          <h2>Todays Sunset:</h2>
-          <div class="box-container">
-            <h3>Sunset Time:</h3>
-          </div>
-          <div class="box-container">
-            <h3>Time Left:</h3>
-          </div>
+            <div class="column box-container">
+                <h3>Time Left:</h3>
+            </div>
+            <div>
+                <!-- Link Map -->
+                <div id="map"></div>
+                <p>It's the Map!</p>
+            </div>
+            </div>
+            <div class="sunset-container column is-full-mobile is-one-half-tablet is-one-half-desktop">
+                <h2 class="is-size-4">Next Sunset:</h2>
+            <div class="column box-container">
+                <h3>Sunset Time:</h3>
+            </div>
+            <div class="column box-container">
+                <h3>Time Left:</h3>
+            </div>
+            <div class="box-container">
+                <h3>Time Left:</h3>
+            </div>
+            <!-- Default Calendar for Date Picking -->
+            <div class="calendar">
+                <label for="datepicker"></label>
+                <input type="text" id="datepicker">
+                <div id="datepickerContainer"></div>
+                </div>
+            </div>
+        </main>
         </div>
-        <div class="sunset-container">
-          <h2>Next Sunset:</h2>
-          <div class="box-container">
-            <h3>Sunset Time:</h3>
-          </div>
-          <div class="box-container">
-            <h3>Time Left:</h3>
-          </div>
-        </div>
-        <div>
-          <!-- Link Map -->
-          <div id="map"></div>
-          <p>It's the Map!</p>
-        </div>
-        <div>
-          <!-- Link Calandar -->
-          <p>Calendar</p>
-          <label for="datepicker">Select Date:</label>
-          <input type="text" id="datepicker">
-          <div id="datepickerContainer"></div>
-          </div>
-       </main>
     </section>
 
+    <!-- Search History Section Area -->
+    <section class="search-history-section">
+        <div>
+            <h3 class="is-size-4">Previous Searches:</h3>
+            <ul>
+                <div class="search-history-list"></div>
+                <!-- Search History Item List Added Here with Previous Search from Local Storage -->
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer Section Area -->
     <footer>
-      <div id="footerDiv">
+      <div id="footerDiv" class="is-flex is-justify-content-space-between">
         <div>
           App Created by GCA²
         </div>
@@ -112,9 +128,10 @@
         </div>
     </footer>
 
-   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script src="./assets/js/script.js"></script>
+    <!-- JavaScript Libraries for jQuery, jQueryUI and our JS file -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="./assets/js/script.js"></script>
   </body>
 
 </html>

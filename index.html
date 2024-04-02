@@ -58,13 +58,15 @@
         </div><br>
     
         <!-- Example form: Will need updated -->
-        <input id="current-location-input" type="text" placeholder="Current Location"><br>
-        <input id="desired-location-input" type="text" placeholder="Desired Location"><br>
-        <button id="submit" type="submit">Submit Button</button>
+        <form id="location-form">
+          <input id="current-location-input" type="text" placeholder="Current Location"><br>
+          <input id="desired-location-input" type="text" placeholder="Desired Location"><br>
+          <button id="submit" type="submit">Submit Button</button>
+        </form>
       </aside>
 
       <main>
-        <div class="sunset-container">
+        <div class="sunset-container" id="sunset-time">
           <h2>Todays Sunset:</h2>
           <div class="box-container">
             <h3>Sunset Time:</h3>

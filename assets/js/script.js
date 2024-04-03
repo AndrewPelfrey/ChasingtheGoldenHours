@@ -1,6 +1,9 @@
 <<<<<<< Updated upstream
 // GRABBING ELEMENTS FROM THE DOM
 let buttonEl = document.querySelector("#submit");
+let searchHistoryEl = document.querySelector("#search-history");
+let currentCity = document.querySelector("#current-location-input")
+let city = document.querySelector("#desired-location-input");
 
 
 // ADDING GOOGLE MAPS API
@@ -133,11 +136,85 @@ function displayTomorrowsSunset(location, sunsetData) {
   // Implementation to display tomorrow's sunset times
 }
 
-// FUNCTION TO DISPLAY SUNSET CALENDAR
-function displaySunsetCalendar(location, sunsetCalendarData) {
-  // Implementation to display sunset calendar for the next 45 days
+// FUNCTION TO DISPLAY SUNSET WEATHER
+function fetchWeatherData(city) {
+    let openWeatherQueryURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=289d20f1ae5e1a64488055403d91c79b`;
+    
+    fetch(openWeatherQueryURL)
+        .then(function (response) {
+            if(!response.ok) {
+                throw response.json();
+            }
+            return response.json();
+        })
+    
+        .then(function (data) {
+            console.log(data); // Returns an array object with cities and lat/long coordinates
+    
+            const lat = data[0].lat;
+            const lon = data[0].lon;
+    
+            console.log(lat);
+            console.log(lon);
+    
+            // Using latitude and longitude to get forcast data
+            let openForecastQueryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=289d20f1ae5e1a64488055403d91c79b&units=imperial`
+    
+            return fetch(openForecastQueryURL)
+        })
+                
+        .then(function (response) {
+            if(!response.ok) {
+                throw alert('Error fecthing forecast data:')
+            }
+            return response.json();
+        })
+    
+        .then(function (forecastData) {
+            console.log(forecastData.list[0].main.temp);
+    
+            renderResults(forecastData); // Calls function to display current weather
+            // Save to localStorage
+            saveToLocalStorage(city);
+            // Update search history display
+            displaySearchHistory();
+        })
+    
+        .catch(function (error) {
+            console.log(error);
+            alert('Error fetching weather data:', error);
+        });
+    
+    }
+
+// FUNCTION TO SAVE THE SEARCHED CITY TO LOCALSTORAGE
+function saveToLocalStorage(city) {
+    let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    // Add the searched city to the search history array
+    searchHistory.push(city);
+
+    // CREATED BY CHATGPT: Keep only the last 8 entries in the search history array
+    if (searchHistory.length > 4) {
+        searchHistory = searchHistory.slice(-4);
+    }
+    // Save the updated search history array back to localStorage
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
 }
 
+// Function to display search history from localStorage
+function displaySearchHistory() {
+    let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    // Clear the existing search history displayed on the page
+    searchHistoryEl.innerHTML = '';
+
+    // Loop through the search history array and create list items to display each searched city
+
+    // Add event listener to each list item to handle click event
+    
+    // Call fetchWeatherData function with the clicked city
+
+    // Need to finish this function to append to the searchHistoryEl
+}
 // FUNCTION TO TOGGLE BETWEEN LIGHT AND DARK MODE
 const themeSwitcher = document.getElementById("theme-switcher");
     themeSwitcher.addEventListener("change", function() {

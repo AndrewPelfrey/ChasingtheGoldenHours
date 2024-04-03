@@ -109,6 +109,8 @@ function getSunsetTime(latitude, longitude, date) {
       .then(response => response.json())
       .then(data => {
           const sunset = new Date(data.results.sunset);
+          const dusk = new Date(data.results.civil_twilight_end);
+          const goldenHourEnd = new Date(data.results.nautical_twilight_end);
 
           const options = {
               timeZone: 'America/New_York',
@@ -118,9 +120,17 @@ function getSunsetTime(latitude, longitude, date) {
           };
 
           const sunsetTime = sunset.toLocaleTimeString('en-US', options);
+          const duskTime = dusk.toLocaleTimeString('en-US', options);
+          const goldenTime = goldenHourEnd.toLocaleTimeString('en-US', options);
 
           const sunsetElement = document.getElementById('sunset-time');
           sunsetElement.innerHTML = `<h3>Sunset Time: ${sunsetTime}</h3>`;
+
+          const duskElement = document.getElementById('dusk-time');
+          duskElement.innerHTML = `<h3>Dusk Time: ${duskTime}</h3>`;
+
+          const goldenElement = document.getElementById('golden-time');
+          goldenElement.innerHTML = `<h3>Golden Time: ${goldenTime}</h3>`;
       })
       .catch(error => console.error('Error fetching sunset time:', error));
 }

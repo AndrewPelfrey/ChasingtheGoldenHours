@@ -1,4 +1,4 @@
-/* IMPORTANT ROOT: Creates the default styling across browsers on page load */
+/* IMPORTANT ROOT: CREATES DEFAULT STYLING ACROSS BROWSERS ON PAGE LOAD */
 :root {
     --primary: #005f73;
     --secondary:  #EE9B00;
@@ -12,7 +12,7 @@
     --white: #ffffff;
 }
 
-/* Creates a dark/light mode that can be switched and enabled through JS with user checkbox. */
+/* CREATES A DARK/LIGHT MODE THAT CAN BE TOGGLED BY USER */
 @media (prefers-color-scheme: dark) {
     :root {
         --primary: #005f73;
@@ -28,7 +28,7 @@
     }
   }
   
-  /* CREATES A DARK THEME WHEN SWITCH IS ACTIVATED */
+  /* CREATES A DARK THEME WHEN JS SWITCH IS ACTIVATED */
   [data-theme=dark],
   .dark-theme {
         --primary: #EE9B00;
@@ -37,9 +37,9 @@
         --auburn: #E0EBEE;
         --rufous: #C0D7DC;
         --rust: #CA6702;
-        --alloy-orange: #BB3E03;
-        --columbia-blue: #AE2012;
-        --alice-blue: #9B2226;
+        --alloy-orange: #9B2226;
+        --columbia-blue: #001219;
+        --alice-blue: #00171F;
         --white: #001219;
   }
 
@@ -61,6 +61,33 @@ h4 {
 color: var(--primary);
 }
 
+/* COLORING "GOLDEN" TEXT GOLD IN TITLE */
+#golden {
+    color: #EE9B00;
+    text-transform: uppercase;
+}
+
+/* DEFAULT LINK & HOVER LINK STYLES */
+a {
+    color: #AE2012;
+}
+
+a:hover {
+    color: #BB3E03;
+}
+
+/* DARK MODE HEADER BUTTON STYLES */
+#headerRight {
+    margin: 10px;
+    padding: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    border: 3px solid var(--rich-black);
+    background-color: var(--primary);
+    color: var(--white);
+    border-radius: 15px;
+}
+
 /* HEADER CONTAINER STYLES */
 #headerDiv {
     margin: auto 0;
@@ -69,10 +96,12 @@ color: var(--primary);
     color: var(--rich-black);
 }
 
+/* ICON STYLES */
 .icon-style {
     color: yellow;
 }
 
+/* SUBTITLE HEADER SECTION STYLES */
 header .subtitle {
     margin: 0;
     padding: 20px;
@@ -81,26 +110,27 @@ header .subtitle {
     text-align: center;
 }
 
+/* MAIN CONTENT SECTION STYLES */
 .main-section {
     margin: auto 0;
     padding: 20px;
     display: flex;
     justify-content: space-around;
     background-color: var(--alice-blue);
-    color: var(--rich-black)
+    color: var(--rich-black);
 }
 
-
+/* SEARCH HISTORY SECTION STYLES */
 .search-history-section {
     margin: auto 0;
     padding: 20px;
     display: flex;
     justify-content: space-around;
     background-color: var(--alice-blue);
-    color: var(--rich-black)
+    color: var(--rich-black);
 }
 
-/* ASIDE WITH CURRENT TIME AND FORM FOR LOCATION SEARCH */
+/* SIDEBAR WITH TIME AND LOCATION SEARCH FORM */
 aside {
     margin: auto 0;
     padding-top: 10px;
@@ -109,6 +139,7 @@ aside {
     padding-right: 20px;
     background-color: var(--alloy-orange);
     text-align: center;
+    border-radius: 15px;
 }
 
 /* TIMESTAMP STYLES */
@@ -123,9 +154,10 @@ aside {
     font-weight: 700;
     background-color: var(--white);
     color: var(--rich-black);
+    border-radius: 10px;
 }
 
-/* SUBMIT BUTTON STYLES */
+/* SUBMIT BUTTON & SUBMIT HOVER STYLES */
 #submit {
     margin: 10px;
     padding: 10px;
@@ -134,6 +166,7 @@ aside {
     border: 3px solid var(--rich-black);
     background-color: var(--primary);
     color: var(--white);
+    border-radius: 15px;
 }
 
 #submit:hover {
@@ -152,16 +185,18 @@ main {
 
 /* CONTAINER FOR TODAY AND NEXT SUNSET INFO */
 .sunset-container {
-    margin: auto 20px;
+    margin: 10px 5px;
     padding: 10px;
     border: 3px solid var(--rich-black);
+    border-radius: 10px;
 }
 
 /* CONTAINER FOR SUNSET TIME, DUSK TIME, TIME LEFT, and GOLDEN TIME */
 .box-container {
-    margin: auto 10px;
-    padding: 10px;
+    margin: 10px;
+    padding: 5px;
     border: 3px solid var(--rich-black);
+    border-radius: 5px;
 }
 
 /* MODAL STYLES */
@@ -172,7 +207,7 @@ main {
 
 /* MAP STYLES */
 #map {
-    height: 300px;
+    height: 310px;
     width: 100%;
   }
 
@@ -183,3 +218,28 @@ main {
     background-color: var(--columbia-blue);
     color: var(--rich-black);
 }
+
+/* RESPONSIVE STYLES */
+/* Small Desktops Responsive Settings */
+@media screen and (max-width: 1200px) {
+    
+  }
+
+/* Tablets Responsive Settings */
+@media screen and (max-width: 992px) {
+    #footerDiv {
+        display: flex;
+        flex-flow: column wrap;
+        text-align: center;
+    }
+  }
+
+
+/* Mobile Phones Responsive Settings */
+@media screen and (max-width: 768px) {
+    #footerDiv {
+        display: flex;
+        flex-flow: column wrap;
+        text-align: center;
+    }
+  }

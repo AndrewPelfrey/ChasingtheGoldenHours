@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 // GRABBING ELEMENTS FROM THE DOM
 let buttonEl = document.querySelector("#submit");
 
@@ -7,8 +8,12 @@ let buttonEl = document.querySelector("#submit");
           ({key: "AIzaSyCV-KxEPg8JUzGUCcmCjBZv3hS5woEOVoM", v: "weekly"});
 
 // VARIABLE DECLARATION
+=======
+>>>>>>> Stashed changes
 let map;
+let mapPreset;
 
+<<<<<<< Updated upstream
 async function initMap() {
 // CLEVELAND COORDINATES
   const position = { lat: 41.4993, lng: -81.6944 };
@@ -18,14 +23,64 @@ async function initMap() {
 
 // MAP CENTERING ON CLEVELAND, DECLARED BY mapID 
   map = new Map(document.getElementById("map"), {
-    zoom: 11,
-    center: position,
-    mapId: "Cleveland",
-  });
+=======
+function initMap() {
+  // Cleveland coordinates
+  mapPreset = { lat: 41.4993, lng: -81.6944 };
 
+  const { Map } = google.maps.importLibrary("maps");
+
+  map = new google.maps.Map(document.getElementById("map"), {
+>>>>>>> Stashed changes
+    zoom: 11,
+    center: mapPreset,
+    mapId: "Cleveland",
+    
+  });
 }
 
+<<<<<<< Updated upstream
 // JS FOR BULMA MODAL
+=======
+var directionsService = new google.maps.DirectionsService();
+
+var directionsDisplay = new google.maps.DirectionsRenderer(); 
+
+directionsDisplay.setMap(map);
+
+const submit = document.getElementById("submit");
+submit.addEventListener('click', calcRoute);
+
+// calculating routes from start to destination
+function calcRoute() {
+  var request = {
+    origin: document.getElementById("current-location-input").value,
+    destination: document.getElementById("desired-location-input").value,
+    // travel mode: driving, walking, bicycle, train, etc
+    travelMode: google.maps.TravelMode.DRIVING,
+    // using miles
+    unitSystem: google.maps.UnitSystem.IMPERIAL,
+  };
+  console.log(calcRoute)
+
+  directionsService.route(request, (result, status) => {
+    if (status == google.maps.DirectionsStatus.OK) {
+      console.log(result);
+
+      directionsDisplay.setDirections(result);
+    } else {
+      console.log(error);
+
+      map.setCenter(mapPreset);
+    }
+  });
+}
+
+initMap();
+
+
+// JS for Bulma Modal
+>>>>>>> Stashed changes
 const openModalButton = document.getElementById('openModal');
 const closeModalButton = document.getElementById('closeModal');
 const modal = document.getElementById('myModal');
@@ -93,7 +148,11 @@ const themeSwitcher = document.getElementById("theme-switcher");
         }
     });
 
+<<<<<<< Updated upstream
 // ADDING CURRENT TIME STAMP
+=======
+// adding current time stamp
+>>>>>>> Stashed changes
 const currentTime = dayjs().format(`h:mm A`);
 $(`#timeStamp`).text(`Time: ` + currentTime);
 

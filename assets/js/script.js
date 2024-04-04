@@ -31,7 +31,7 @@ submit.addEventListener('submit', calcRoute);
 
 // calculating routes from start to destination
 function calcRoute(event) {
-  event.preventDefaullt();
+  event.preventDefault();
   var request = {
     origin: document.getElementById("current-location-input").value,
     destination: document.getElementById("desired-location-input").value,
@@ -200,6 +200,7 @@ function displaySearchHistory() {
 
     // Need to finish this function to append to the searchHistoryEl
 }
+
 // FUNCTION TO TOGGLE BETWEEN LIGHT AND DARK MODE
 const themeSwitcher = document.getElementById("theme-switcher");
     themeSwitcher.addEventListener("change", function() {

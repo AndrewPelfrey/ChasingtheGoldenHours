@@ -26,11 +26,12 @@ var directionsDisplay = new google.maps.DirectionsRenderer();
 
 directionsDisplay.setMap(map);
 
-const submit = document.getElementById("submit");
-submit.addEventListener('click', calcRoute);
+const submit = document.getElementById("location-form");
+submit.addEventListener('submit', calcRoute);
 
 // calculating routes from start to destination
-function calcRoute() {
+function calcRoute(event) {
+  event.preventDefaullt();
   var request = {
     origin: document.getElementById("current-location-input").value,
     destination: document.getElementById("desired-location-input").value,

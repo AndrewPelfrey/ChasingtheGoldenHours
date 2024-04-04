@@ -1,3 +1,8 @@
+// GRABBING ELEMENTS FROM THE DOM
+let buttonEl = document.querySelector("#submit");
+let searchHistoryEl = document.querySelector("#search-history");
+let currentCity = document.querySelector("#current-location-input")
+let city = document.querySelector("#desired-location-input");
 let map;
 let mapPreset;
 

@@ -70,10 +70,7 @@ function calcRoute(event) {
   
       fetchWeatherData(cityInputVal); // CALLS OPENWEATHER API and CALLS PRINTWEATHER FUNCTION FOR SUNSET CITY
 
-        // SAVED THE SEARCHED CITY TO LOCAL STORAGE
-        //  const desiredLocation = document.getElementById("desired-location-input").value;
-        //  saveToLocalStorage(desiredLocation);
-        console.log(desiredLocation);
+      // CALL FUNCTION TO DISPLAY SEARCH HISTORY
         displaySearchHistory();
 
     } else {
@@ -208,8 +205,6 @@ function fetchWeatherData(cityInputVal) {
         })
     
         .then(function (forecastData) {
-            console.log(forecastData.list[0].main.temp);
-    
             renderResults(forecastData); // Calls function to display current weather
             // Save to localStorage
             saveToLocalStorage(cityInputVal);

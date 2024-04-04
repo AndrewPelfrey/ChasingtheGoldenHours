@@ -55,7 +55,7 @@ function calcRoute(event) {
   });
 }
 
-initMap();
+// initMap();
 
 
 // JS for Bulma Modal
@@ -220,13 +220,13 @@ buttonEl.addEventListener('submit', handleLocationSearch());
 
 // CALLING ALL NECESSARY FUNCTIONS ON DOCUMENT PAGE LOAD
 $(document).ready(function() {
-    $('<div id="datepicker"></div>').insertAfter('label[for="datepicker"]').datepicker();
+    // $('<div id="datepicker"></div>').insertAfter('label[for="datepicker"]').datepicker();
 
-    $('#datepicker').datepicker({
-        dateFormat: 'yy-mm-dd',
-        changeMonth: true, 
-        changeYear: true 
-    });
+    // $('#datepicker').datepicker({
+    //     dateFormat: 'yy-mm-dd',
+    //     changeMonth: true, 
+    //     changeYear: true 
+    // });
 
     initMap();
 });

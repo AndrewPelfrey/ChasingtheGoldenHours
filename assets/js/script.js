@@ -1,15 +1,14 @@
 // GRABBING ELEMENTS FROM THE DOM
-let buttonEl = document.querySelector("#submit");
-let searchHistoryEl = document.querySelector(".search-history-list"); 
+let searchHistoryEl = document.querySelector(".search-history-list");  // SEARCH HISTORY LIST
 let currentCity = document.querySelector("#current-location-input") // CURRENT CITY
-let city = document.querySelector("#desired-location-input"); // SUNSET CITY
+let city = document.querySelector("#desired-location-input"); // DESIRED SUNSET CITY
 let currentWeatherEl = document.querySelector("#current-weather-result"); // CURRENT WEATHER IN SUNSET CITY
+let submit = document.getElementById("location-form"); // SUBMIT BUTTON ELEMENT
 let map;
 let directionsService;
 let directionsDisplay;
 let duration;
 let mapPreset;
-let submit = document.getElementById("location-form"); // SUBMIT BUTTON ELEMENT
 
 // displaying the initial map set as Cleveland for default 
 function initMap() {
@@ -31,12 +30,7 @@ function initMap() {
   const LocationAutocompletedest = new google.maps.places.Autocomplete(desiredLocationInput);
 }
 
-// SUBMIT ELEMENT DECLARATION MOVED TO VERY TOP
-// submit.addEventListener('submit', calcRoute); // MOVED TO EVENT LISTENER VERY BOTTOM
-
 function calcRoute(event) {
-//   event.preventDefault(); // ADDED AT VERY BOTTOM IN EVENT LISTENER
-
   // declaring origin and destination as const fromn the HTML input 
   const origin = document.getElementById("current-location-input").value;
   const destination = document.getElementById("desired-location-input").value;
@@ -64,20 +58,29 @@ function calcRoute(event) {
       console.log(destinationLongitude);
       console.log(time);
       console.log(result);
-      // SAVED THE SEARCHED CITY TO LOCAL STORAGE
-    //  const desiredLocation = document.getElementById("desired-location-input").value;
-    //  saveToLocalStorage(desiredLocation);
-     console.log(desiredLocation);
-     displaySearchHistory();
+
+      // FUNCTION TO HANDLE FORM SUBMISSION AND LOCATION SEARCH
+      let cityInputVal = result.request.origin.query; // SUNSET CITY INPUT
+  
+      // CHECKING VALIDATION ON THE SUNSET CITY INPUT
+      if (!cityInputVal) {
+          console.log('You need a city input to search.');
+          return;
+      }
+  
+      fetchWeatherData(cityInputVal); // CALLS OPENWEATHER API and CALLS PRINTWEATHER FUNCTION FOR SUNSET CITY
+
+        // SAVED THE SEARCHED CITY TO LOCAL STORAGE
+        //  const desiredLocation = document.getElementById("desired-location-input").value;
+        //  saveToLocalStorage(desiredLocation);
+        console.log(desiredLocation);
+        displaySearchHistory();
 
     } else {
       alert("Error calculating route. Please check your input locations.");
     }
-  });
+});
 }
-
-// initMap(); This is already called at the bottom when document is loaded. Unnecessary?
-
 
 // JS for Bulma Modal
 const openModalButton = document.getElementById('openModal');
@@ -91,25 +94,6 @@ openModalButton.addEventListener('click', function() {
 closeModalButton.addEventListener('click', function() {
     modal.classList.remove('is-active');
   });
-
-// FUNCTION TO HANDLE FORM SUBMISSION AND LOCATION SEARCH
-function handleLocationSearch() {
-    // event.preventDefault(); // HANDLED IN THE EVENT LISTENER AT VERY BOTTOM
-
-    let cityInputVal = city.value; // SUNSET CITY INPUT
-
-    // CHECKING VALIDATION ON THE SUNSET CITY INPUT
-    if (!cityInputVal) {
-        console.log('You need a city input to search.');
-        return;
-    }
-
-
-    // Implementation to search for a location and retrieve sunset data
-
-
-    fetchWeatherData(cityInputVal); // CALLS OPENWEATHER API and CALLS PRINTWEATHER FUNCTION FOR SUNSET CITY
-}
 
 // FUNCTION TO DISPLAY CURRENT SUNSET TIMES
 function getSunsetTime(latitude, longitude, date) {
@@ -209,13 +193,6 @@ function fetchWeatherData(cityInputVal) {
             // Correct Version for Final Use
             const lat = data[0].lat;
             const lon = data[0].lon;
-
-            // // Example version for Testing Purpose
-            // const lat = 41.4993;
-            // const lon = -81.6944;
-    
-            console.log(lat);
-            console.log(lon);
     
             // Using latitude and longitude to get forcast data
             let openForecastQueryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=289d20f1ae5e1a64488055403d91c79b&units=imperial`
@@ -307,28 +284,29 @@ function saveToLocalStorage(city) {
 
 // Function to display search history from localStorage
 function displaySearchHistory() {
-  let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
-  // Clear the existing search history displayed on the page
-  searchHistoryEl.innerHTML = '';
+    let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
 
+    // Clear the existing search history displayed on the page
+    searchHistoryEl.innerHTML = '';
 
-  // Loop through the search history array and create list items to display each searched city
+    // LOOP THROUGH THE SEARCH HISTORY ARRAY AND CREATE LIST ITEMS TO DISPLAY EACH SEARCH CITY
     for (let i = searchHistory.length - 1; i >= 0; i--) {
-      const city = searchHistory[i];
+        const city = searchHistory[i];
  
-    const listItem = document.createElement(`li`);
-    listItem.textContent = city;
+        const listItem = document.createElement(`li`);
+        listItem.textContent = city;
  
-  // Add event listener to each list item to handle click event
-  listItem.addEventListener(`click`, () => {
-   city.value = city;
-   submit.click();
-  // Call fetchWeatherData function with the clicked city
-  fetchWeatherData(city);
-});
-  // Need to finish this function to append to the searchHistoryEl
-  searchHistoryEl.appendChild(listItem)
-}
+        // ADD EVENT LISTENER TO EACH LIST ITEM TO HANDLE CLICK EVENT
+        listItem.addEventListener(`click`, () => {
+            city.value = city;
+            submit.click();
+            // CALL FETCHWEATHERDATA FUNCTION WITH CLICKED CITY
+            fetchWeatherData(city);
+        });
+
+        // APPEND TO THE SEARCHHISTORYEL
+        searchHistoryEl.appendChild(listItem)
+    }
 }
 
 
@@ -342,26 +320,17 @@ const themeSwitcher = document.getElementById("theme-switcher");
         }
     });
 
-// adding current time stamp
+// ADDING CURRENT TIMESTAMP
 const currentTime = dayjs().format(`h:mm A`);
 $(`#timeStamp`).text(`Time: ` + currentTime);
 
 
 // CALLING ALL NECESSARY FUNCTIONS ON DOCUMENT PAGE LOAD
 $(document).ready(function() {
-    // $('<div id="datepicker"></div>').insertAfter('label[for="datepicker"]').datepicker();
-
-    // $('#datepicker').datepicker({
-    //     dateFormat: 'yy-mm-dd',
-    //     changeMonth: true, 
-    //     changeYear: true 
-    // });
-
     // SUBMIT BUTTON EVENT LISTENER TO CALL CALCROUTE AND SEARCH FUNCTIONS
     submit.addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent form submission
-        calcRoute(); // Call the first function
-        handleLocationSearch(); // Call the second function
+        calcRoute(); // CALL FUNCTION TO CALCULATE DIRECTION AND CURRENT WEATHER
     });
     localStorage.removeItem(`searchHistory`);
 

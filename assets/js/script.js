@@ -6,9 +6,9 @@ let city = document.querySelector("#desired-location-input");
 let map;
 let directionsService;
 let directionsDisplay;
-let destinationLat;
-let destinationLng;
+let duration;
 
+// displaying the initial map set as Cleveland for default 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 11,
@@ -20,6 +20,14 @@ function initMap() {
   directionsDisplay = new google.maps.DirectionsRenderer();
   directionsDisplay.setMap(map);
 
+  const currentLocationInput = document.getElementById("current-location-input");
+  const desiredLocationInput = document.getElementById("desired-location-input");
+
+  // auto complete variables 
+  const LocationAutocompleteorigin = new google.maps.places.Autocomplete(currentLocationInput);
+  const LocationAutocompletedest = new google.maps.places.Autocomplete(desiredLocationInput);
+
+  // connecting the button to the calcRoute function 
   const submit = document.getElementById("location-form");
   submit.addEventListener('submit', calcRoute);
 }
@@ -27,9 +35,11 @@ function initMap() {
 function calcRoute(event) {
   event.preventDefault();
 
+  // declaring origin and destination as const fromn the HTML input 
   const origin = document.getElementById("current-location-input").value;
   const destination = document.getElementById("desired-location-input").value;
 
+  // request for directions from origin to destination 
   const request = {
     origin: origin,
     destination: destination,
@@ -37,15 +47,21 @@ function calcRoute(event) {
     unitSystem: google.maps.UnitSystem.IMPERIAL,
   };
 
+  // displaying the request onto the map if directions are correct 
   directionsService.route(request, (result, status) => {
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(result);
-      destinationLat = result.routes[0].legs[0].end_location.lat();
-      destinationLng = result.routes[0].legs[0].end_location.lng();
       
-      console.log("Destination Latitude:", destinationLat);
-      console.log("Destination Longitude:", destinationLng);
+      // getting the long, lat and time from the calcRoute array 
+      destinationLatitude = result.routes[0].legs[0].end_location.lat();
+      destinationLongitude = result.routes[0].legs[0].end_location.lng();
+      time = result.routes[0].legs[0].duration.text;
       
+      // console logging the dest long, lat and time for other API 
+      console.log(destinationLatitude);
+      console.log(destinationLongitude);
+      console.log(time);
+      console.log(result);
     } else {
       alert("Error calculating route. Please check your input locations.");
     }

@@ -64,8 +64,11 @@
             
                 <!-- FORM FOR USER INPUT OF CURRENT AND DESIRED LOCATION FOR SUNSET ANALYSIS -->
                 <form id="location-form">
-                    <input id="current-location-input" type="text" placeholder="Current Location"><br>
-                    <input id="desired-location-input" type="text" placeholder="Desired Location"><br>
+                    <label for="current-location-input">Current Location:</label>
+                    <input type="text" id="current-location-input" autocomplete="off">
+                    <br>
+                    <label for="desired-location-input">Desired Location:</label>
+                    <input type="text" id="desired-location-input" autocomplete="off">
                     <button id="submit" type="submit">Submit Button</button>
                 </form>
             </aside>
@@ -90,6 +93,7 @@
             <div>
                 <!-- MAP DISPLAY -->
                 <div id="map"></div>
+                <div id="travel-time"></div>
                 <p>It's the Map!</p>
             </div>
             </div>

@@ -1,12 +1,15 @@
 // GRABBING ELEMENTS FROM THE DOM
 let buttonEl = document.querySelector("#submit");
-let searchHistoryEl = document.querySelector("#search-history");
-let currentCity = document.querySelector("#current-location-input")
-let city = document.querySelector("#desired-location-input");
+let searchHistoryEl = document.querySelector("#search-history"); 
+let currentCity = document.querySelector("#current-location-input") // CURRENT CITY
+let city = document.querySelector("#desired-location-input"); // SUNSET CITY
+let currentWeatherEl = document.querySelector("#current-weather-result"); // CURRENT WEATHER IN SUNSET CITY
 let map;
 let directionsService;
 let directionsDisplay;
 let duration;
+let mapPreset;
+let submit = document.getElementById("location-form"); // SUBMIT BUTTON ELEMENT
 
 // displaying the initial map set as Cleveland for default 
 function initMap() {
@@ -26,14 +29,13 @@ function initMap() {
   // auto complete variables 
   const LocationAutocompleteorigin = new google.maps.places.Autocomplete(currentLocationInput);
   const LocationAutocompletedest = new google.maps.places.Autocomplete(desiredLocationInput);
-
-  // connecting the button to the calcRoute function 
-  const submit = document.getElementById("location-form");
-  submit.addEventListener('submit', calcRoute);
 }
 
+// SUBMIT ELEMENT DECLARATION MOVED TO VERY TOP
+// submit.addEventListener('submit', calcRoute); // MOVED TO EVENT LISTENER VERY BOTTOM
+
 function calcRoute(event) {
-  event.preventDefault();
+//   event.preventDefault(); // ADDED AT VERY BOTTOM IN EVENT LISTENER
 
   // declaring origin and destination as const fromn the HTML input 
   const origin = document.getElementById("current-location-input").value;
@@ -68,7 +70,7 @@ function calcRoute(event) {
   });
 }
 
-initMap();
+// initMap(); This is already called at the bottom when document is loaded. Unnecessary?
 
 
 // JS for Bulma Modal
@@ -85,8 +87,22 @@ closeModalButton.addEventListener('click', function() {
   });
 
 // FUNCTION TO HANDLE FORM SUBMISSION AND LOCATION SEARCH
-function handleLocationSearch(event) {
-  // Implementation to search for a location and retrieve sunset data
+function handleLocationSearch() {
+    // event.preventDefault(); // HANDLED IN THE EVENT LISTENER AT VERY BOTTOM
+
+    let cityInputVal = city.value; // SUNSET CITY INPUT
+
+    // CHECKING VALIDATION ON THE SUNSET CITY INPUT
+    if (!cityInputVal) {
+        console.log('You need a city input to search.');
+        return;
+    }
+
+
+    // Implementation to search for a location and retrieve sunset data
+
+
+    fetchWeatherData(cityInputVal); // CALLS OPENWEATHER API and CALLS PRINTWEATHER FUNCTION FOR SUNSET CITY
 }
 
 // FUNCTION TO DISPLAY CURRENT SUNSET TIMES
@@ -169,9 +185,9 @@ const tDate = '2024-04-9'; // Tomorrow
 
 displayTomorrowsSunset(tLatitude, tLongitude, tDate);
 
-// FUNCTION TO DISPLAY SUNSET WEATHER
-function fetchWeatherData(city) {
-    let openWeatherQueryURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=289d20f1ae5e1a64488055403d91c79b`;
+// FUNCTION TO FETCH SUNSET WEATHER DATA
+function fetchWeatherData(cityInputVal) {
+    let openWeatherQueryURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityInputVal}&limit=1&appid=289d20f1ae5e1a64488055403d91c79b`;
     
     fetch(openWeatherQueryURL)
         .then(function (response) {
@@ -184,8 +200,13 @@ function fetchWeatherData(city) {
         .then(function (data) {
             console.log(data); // Returns an array object with cities and lat/long coordinates
     
+            // Correct Version for Final Use
             const lat = data[0].lat;
             const lon = data[0].lon;
+
+            // // Example version for Testing Purpose
+            // const lat = 41.4993;
+            // const lon = -81.6944;
     
             console.log(lat);
             console.log(lon);
@@ -208,7 +229,7 @@ function fetchWeatherData(city) {
     
             renderResults(forecastData); // Calls function to display current weather
             // Save to localStorage
-            saveToLocalStorage(city);
+            saveToLocalStorage(cityInputVal);
             // Update search history display
             displaySearchHistory();
         })
@@ -220,13 +241,57 @@ function fetchWeatherData(city) {
     
     }
 
+// FUNCTION TO PRINT THE CURRENT WEATHER RESULTS TO THE PAGE
+function renderResults(resultObj) {
+    console.log(resultObj);
+
+    // Update the UI dynamically with the retrieved weather data.
+    const resultCard = document.createElement('div');
+    resultCard.classList.add('card');
+
+    const resultBody = document.createElement('div');
+    resultBody.classList.add('card-body');
+    resultCard.append(resultBody);
+
+    const icon = resultObj.list[0].weather[0].icon; // DEFINING THE ICON 3 DIGIT CODE TO A VARIBALE
+
+    const resultHeader = document.createElement('h3');
+    resultHeader.classList.add('card-header');
+    resultHeader.innerHTML = `Todays Weather ${resultObj.city.name} <img src="http://openweathermap.org/img/w/${icon}.png" alt="img"></img>`;
+
+    const dateContentEl = document.createElement('p');
+    dateContentEl.innerHTML = `<strong>Date:</strong> ${resultObj.list[0].dt_txt}`;
+
+    const tempContentEl =document.createElement('p');
+    tempContentEl.innerHTML = `<strong>Temp:</strong> ${resultObj.list[0].main.temp} F`;
+
+    const humidityContentEl = document.createElement('p');
+    humidityContentEl.innerHTML = `<strong>Humidity:</strong> ${resultObj.list[0].main.humidity}%`;
+
+    const windContentEl = document.createElement('p');
+    windContentEl.innerHTML = `<strong>Wind:</strong> ${resultObj.list[0].wind.speed}mph<br/>`;
+
+    resultBody.append(resultHeader, dateContentEl, tempContentEl, humidityContentEl, windContentEl);
+
+    // Find existing result card and replace it with the new one
+    const existingResultCard = document.querySelector('.card');
+    if (existingResultCard) {
+        existingResultCard.replaceWith(resultCard);
+    } else {
+        // If there's no existing result card, just append the new one
+        console.log(currentWeatherEl);
+        currentWeatherEl.appendChild(resultCard);
+    }
+}
+
+
 // FUNCTION TO SAVE THE SEARCHED CITY TO LOCALSTORAGE
 function saveToLocalStorage(city) {
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
     // Add the searched city to the search history array
     searchHistory.push(city);
 
-    // CREATED BY CHATGPT: Keep only the last 8 entries in the search history array
+    // CREATED BY CHATGPT: Keep only the last 4 entries in the search history array
     if (searchHistory.length > 4) {
         searchHistory = searchHistory.slice(-4);
     }
@@ -238,7 +303,7 @@ function saveToLocalStorage(city) {
 function displaySearchHistory() {
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
     // Clear the existing search history displayed on the page
-    searchHistoryEl.innerHTML = '';
+    // searchHistoryEl.innerHTML = '';
 
     // Loop through the search history array and create list items to display each searched city
 
@@ -263,8 +328,6 @@ const themeSwitcher = document.getElementById("theme-switcher");
 const currentTime = dayjs().format(`h:mm A`);
 $(`#timeStamp`).text(`Time: ` + currentTime);
 
-// SUBMIT BUTTON EVENT LISTENER
-buttonEl.addEventListener('submit', handleLocationSearch());
 
 // CALLING ALL NECESSARY FUNCTIONS ON DOCUMENT PAGE LOAD
 $(document).ready(function() {
@@ -275,5 +338,14 @@ $(document).ready(function() {
     //     changeMonth: true, 
     //     changeYear: true 
     // });
+
+    // SUBMIT BUTTON EVENT LISTENER TO CALL CALCROUTE AND SEARCH FUNCTIONS
+    submit.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+        calcRoute(); // Call the first function
+        handleLocationSearch(); // Call the second function
+    });
+
+    initMap(); // CALLS THE MAP FUNCTION ON PAGE LOAD
 });
 

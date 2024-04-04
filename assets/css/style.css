@@ -219,6 +219,22 @@ main {
     color: var(--rich-black);
 }
 
+/* SEARCH HISTORY STYLES */
+.search-history-section ul li {
+    display: inline;
+    list-style: none;
+    padding: 10px;
+    margin: 30px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+ }
+ 
+ .search-history-section ul li:hover {
+    background-color: #f0f0f0;
+ }
+ 
+ 
+
 /* RESPONSIVE STYLES */
 /* Small Desktops Responsive Settings */
 @media screen and (max-width: 1200px) {

@@ -1,6 +1,6 @@
 // GRABBING ELEMENTS FROM THE DOM
 let buttonEl = document.querySelector("#submit");
-let searchHistoryEl = document.querySelector("#search-history"); 
+let searchHistoryEl = document.querySelector(".search-history-list"); 
 let currentCity = document.querySelector("#current-location-input") // CURRENT CITY
 let city = document.querySelector("#desired-location-input"); // SUNSET CITY
 let currentWeatherEl = document.querySelector("#current-weather-result"); // CURRENT WEATHER IN SUNSET CITY
@@ -64,6 +64,12 @@ function calcRoute(event) {
       console.log(destinationLongitude);
       console.log(time);
       console.log(result);
+      // SAVED THE SEARCHED CITY TO LOCAL STORAGE
+    //  const desiredLocation = document.getElementById("desired-location-input").value;
+    //  saveToLocalStorage(desiredLocation);
+     console.log(desiredLocation);
+     displaySearchHistory();
+
     } else {
       alert("Error calculating route. Please check your input locations.");
     }
@@ -301,18 +307,30 @@ function saveToLocalStorage(city) {
 
 // Function to display search history from localStorage
 function displaySearchHistory() {
-    let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
-    // Clear the existing search history displayed on the page
-    // searchHistoryEl.innerHTML = '';
+  let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+  // Clear the existing search history displayed on the page
+  searchHistoryEl.innerHTML = '';
 
-    // Loop through the search history array and create list items to display each searched city
 
-    // Add event listener to each list item to handle click event
-    
-    // Call fetchWeatherData function with the clicked city
-
-    // Need to finish this function to append to the searchHistoryEl
+  // Loop through the search history array and create list items to display each searched city
+    for (let i = searchHistory.length - 1; i >= 0; i--) {
+      const city = searchHistory[i];
+ 
+    const listItem = document.createElement(`li`);
+    listItem.textContent = city;
+ 
+  // Add event listener to each list item to handle click event
+  listItem.addEventListener(`click`, () => {
+   city.value = city;
+   submit.click();
+  // Call fetchWeatherData function with the clicked city
+  fetchWeatherData(city);
+});
+  // Need to finish this function to append to the searchHistoryEl
+  searchHistoryEl.appendChild(listItem)
 }
+}
+
 
 // FUNCTION TO TOGGLE BETWEEN LIGHT AND DARK MODE
 const themeSwitcher = document.getElementById("theme-switcher");
@@ -345,6 +363,7 @@ $(document).ready(function() {
         calcRoute(); // Call the first function
         handleLocationSearch(); // Call the second function
     });
+    localStorage.removeItem(`searchHistory`);
 
     initMap(); // CALLS THE MAP FUNCTION ON PAGE LOAD
 });

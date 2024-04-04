@@ -130,9 +130,44 @@ const date = '2024-04-8'; // Project Due Date
 getSunsetTime(latitude, longitude, date);
 
 // FUNCTION TO DISPLAY TOMORROW'S SUNSET TIMES
-function displayTomorrowsSunset(location, sunsetData) {
-  // Implementation to display tomorrow's sunset times
+function displayTomorrowsSunset(tLatitude, tLongitude, tDate) {
+  const apiUrl = `https://api.sunrise-sunset.org/json?lat=${tLatitude}&lng=${tLongitude}&date=${tDate}&formatted=0`;
+
+  fetch(apiUrl)
+      .then(response => response.json())
+      .then(tData => {
+          const tSunset = new Date(tData.results.sunset);
+          const tDusk = new Date(tData.results.civil_twilight_end);
+          const tGoldenHourEnd = new Date(tData.results.nautical_twilight_end);
+console.log(tSunset);
+          const options = {
+              timeZone: 'America/New_York',
+              hour: 'numeric',
+              minute: 'numeric',
+              second: 'numeric'
+          };
+
+          const tSunsetTime = tSunset.toLocaleTimeString('en-US', options);
+          const tDuskTime = tDusk.toLocaleTimeString('en-US', options);
+          const tGoldenTime = tGoldenHourEnd.toLocaleTimeString('en-US', options);
+
+          const tSunsetElement = document.getElementById('tom-sunset-time');
+          tSunsetElement.innerHTML = `<h3>Sunset Time: ${tSunsetTime}</h3>`;
+
+          const tDuskElement = document.getElementById('tom-dusk-time');
+          tDuskElement.innerHTML = `<h3>Dusk Time: ${tDuskTime}</h3>`;
+
+          const tGoldenElement = document.getElementById('tom-golden-time');
+          tGoldenElement.innerHTML = `<h3>Golden Time: ${tGoldenTime}</h3>`;
+      })
+      .catch(error => console.error('Error fetching sunset time:', error));
 }
+
+const tLatitude = 41.4993; // Latitude of Tomorrow Location
+const tLongitude = -81.6944; // Longitude of Tomorrow Location
+const tDate = '2024-04-9'; // Tomorrow
+
+displayTomorrowsSunset(tLatitude, tLongitude, tDate);
 
 // FUNCTION TO DISPLAY SUNSET WEATHER
 function fetchWeatherData(city) {

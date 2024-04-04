@@ -4,58 +4,47 @@ let searchHistoryEl = document.querySelector("#search-history");
 let currentCity = document.querySelector("#current-location-input")
 let city = document.querySelector("#desired-location-input");
 let map;
-let mapPreset;
+let directionsService;
+let directionsDisplay;
 
 function initMap() {
-  // Cleveland coordinates
-  mapPreset = { lat: 41.4993, lng: -81.6944 };
-
-  const { Map } = google.maps.importLibrary("maps");
-
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 11,
-    center: mapPreset,
+    center: { lat: 41.4993, lng: -81.6944 },
     mapId: "Cleveland",
-    
   });
+
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay.setMap(map);
+
+  const submit = document.getElementById("location-form");
+  submit.addEventListener('submit', calcRoute);
 }
 
-var directionsService = new google.maps.DirectionsService();
-
-var directionsDisplay = new google.maps.DirectionsRenderer(); 
-
-directionsDisplay.setMap(map);
-
-const submit = document.getElementById("location-form");
-submit.addEventListener('submit', calcRoute);
-
-// calculating routes from start to destination
 function calcRoute(event) {
   event.preventDefault();
-  var request = {
-    origin: document.getElementById("current-location-input").value,
-    destination: document.getElementById("desired-location-input").value,
-    // travel mode: driving, walking, bicycle, train, etc
+
+  const origin = document.getElementById("current-location-input").value;
+  const destination = document.getElementById("desired-location-input").value;
+
+  const request = {
+    origin: origin,
+    destination: destination,
     travelMode: google.maps.TravelMode.DRIVING,
-    // using miles
     unitSystem: google.maps.UnitSystem.IMPERIAL,
   };
-  console.log(calcRoute)
 
   directionsService.route(request, (result, status) => {
     if (status == google.maps.DirectionsStatus.OK) {
-      console.log(result);
-
       directionsDisplay.setDirections(result);
     } else {
-      console.log(error);
-
-      map.setCenter(mapPreset);
+      alert("Error calculating route. Please check your input locations.");
     }
   });
 }
 
-// initMap();
+initMap();
 
 
 // JS for Bulma Modal
@@ -227,7 +216,5 @@ $(document).ready(function() {
     //     changeMonth: true, 
     //     changeYear: true 
     // });
-
-    initMap();
 });
 

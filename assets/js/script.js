@@ -6,6 +6,8 @@ let city = document.querySelector("#desired-location-input");
 let map;
 let directionsService;
 let directionsDisplay;
+let destinationLat;
+let destinationLng;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -38,6 +40,12 @@ function calcRoute(event) {
   directionsService.route(request, (result, status) => {
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(result);
+      destinationLat = result.routes[0].legs[0].end_location.lat();
+      destinationLng = result.routes[0].legs[0].end_location.lng();
+      
+      console.log("Destination Latitude:", destinationLat);
+      console.log("Destination Longitude:", destinationLng);
+      
     } else {
       alert("Error calculating route. Please check your input locations.");
     }

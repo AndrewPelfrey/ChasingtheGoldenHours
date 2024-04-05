@@ -52,6 +52,10 @@ function calcRoute(event) {
       destinationLatitude = result.routes[0].legs[0].end_location.lat();
       destinationLongitude = result.routes[0].legs[0].end_location.lng();
       time = result.routes[0].legs[0].duration.text;
+
+      // display travel time on the webpage
+    const travelTimeElement = document.getElementById("travel-time");
+    travelTimeElement.innerHTML = `<h3>Travel Time: ${time}</h3>`;
       
       // console logging the dest long, lat and time for other API 
       console.log(destinationLatitude);

@@ -287,10 +287,13 @@ function displaySearchHistory() {
     // Clear the existing search history displayed on the page
     searchHistoryEl.innerHTML = '';
 
+    // MAKING THE LOCATIONS UNIQUE
+    let uniqueCities = new Set();
     // LOOP THROUGH THE SEARCH HISTORY ARRAY AND CREATE LIST ITEMS TO DISPLAY EACH SEARCH CITY
+    
     for (let i = searchHistory.length - 1; i >= 0; i--) {
         const cityItem = searchHistory[i];
- 
+        if (!uniqueCities.has(cityItem.cityname)) {
         const listItem = document.createElement(`li`);
         listItem.textContent = cityItem.cityname;
  
@@ -304,7 +307,9 @@ function displaySearchHistory() {
         });
 
         // APPEND TO THE SEARCHHISTORYEL
-        searchHistoryEl.appendChild(listItem)
+        searchHistoryEl.appendChild(listItem);
+        uniqueCities.add(cityItem.cityname);
+      }  
     }
 }
 

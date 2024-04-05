@@ -63,16 +63,10 @@ function calcRoute(event) {
       console.log(time);
       console.log(result);
 
-      // FUNCTION TO HANDLE FORM SUBMISSION AND LOCATION SEARCH
-      let cityInputVal = result.request.origin.query; // SUNSET CITY INPUT
+    // FUNCTION TO HANDLE FORM SUBMISSION AND LOCATION SEARCH
+      let cityInputVal = result.routes[0].legs[0].end_address;
   
-      // CHECKING VALIDATION ON THE SUNSET CITY INPUT
-      if (!cityInputVal) {
-          console.log('You need a city input to search.');
-          return;
-      }
-  
-      fetchWeatherData(cityInputVal); // CALLS OPENWEATHER API and CALLS PRINTWEATHER FUNCTION FOR SUNSET CITY
+      fetchWeatherData(destinationLatitude, destinationLongitude, cityInputVal); // CALLS OPENWEATHER API and CALLS PRINTWEATHER FUNCTION FOR SUNSET CITY
 
       // CALL FUNCTION TO DISPLAY SEARCH HISTORY
         displaySearchHistory();
@@ -177,10 +171,22 @@ const tDate = '2024-04-9'; // Tomorrow
 displayTomorrowsSunset(tLatitude, tLongitude, tDate);
 
 // FUNCTION TO FETCH SUNSET WEATHER DATA
-function fetchWeatherData(cityInputVal) {
-    let openWeatherQueryURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityInputVal}&limit=1&appid=289d20f1ae5e1a64488055403d91c79b`;
+function fetchWeatherData(destinationLatitude, destinationLongitude, cityInputVal) {
     
-    fetch(openWeatherQueryURL)
+    // Correct Version for Final Use
+    const lat = destinationLatitude;
+    const lon = destinationLongitude;
+
+    let cityObj = {
+        cityname: cityInputVal,
+        lat: destinationLatitude,
+        lon: destinationLongitude,
+    }
+
+    // Using latitude and longitude to get forcast data
+    let openForecastQueryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=289d20f1ae5e1a64488055403d91c79b&units=imperial`
+
+    fetch(openForecastQueryURL)
         .then(function (response) {
             if(!response.ok) {
                 throw response.json();
@@ -188,30 +194,10 @@ function fetchWeatherData(cityInputVal) {
             return response.json();
         })
     
-        .then(function (data) {
-            console.log(data); // Returns an array object with cities and lat/long coordinates
-    
-            // Correct Version for Final Use
-            const lat = data[0].lat;
-            const lon = data[0].lon;
-    
-            // Using latitude and longitude to get forcast data
-            let openForecastQueryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=289d20f1ae5e1a64488055403d91c79b&units=imperial`
-    
-            return fetch(openForecastQueryURL)
-        })
-                
-        .then(function (response) {
-            if(!response.ok) {
-                throw alert('Error fecthing forecast data:')
-            }
-            return response.json();
-        })
-    
         .then(function (forecastData) {
             renderResults(forecastData); // Calls function to display current weather
             // Save to localStorage
-            saveToLocalStorage(cityInputVal);
+            saveToLocalStorage(cityObj);
             // Update search history display
             displaySearchHistory();
         })
@@ -290,17 +276,18 @@ function displaySearchHistory() {
 
     // LOOP THROUGH THE SEARCH HISTORY ARRAY AND CREATE LIST ITEMS TO DISPLAY EACH SEARCH CITY
     for (let i = searchHistory.length - 1; i >= 0; i--) {
-        const city = searchHistory[i];
+        const cityItem = searchHistory[i];
  
         const listItem = document.createElement(`li`);
-        listItem.textContent = city;
+        listItem.textContent = cityItem.cityname;
  
         // ADD EVENT LISTENER TO EACH LIST ITEM TO HANDLE CLICK EVENT
         listItem.addEventListener(`click`, () => {
-            city.value = city;
-            submit.click();
+            city.value = cityItem.cityname;
+            calcRoute();
+
             // CALL FETCHWEATHERDATA FUNCTION WITH CLICKED CITY
-            fetchWeatherData(city);
+            fetchWeatherData(cityItem.lat, cityItem.lon, cityItem.cityname);
         });
 
         // APPEND TO THE SEARCHHISTORYEL

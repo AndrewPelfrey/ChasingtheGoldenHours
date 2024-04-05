@@ -21,17 +21,17 @@
 <body>
     <!-- HEADER SECTION -->
     <header>
-      <div id="headerDiv" class="is-flex is-justify-content-space-between is-align-items-center">
+      <div id="headerDiv" class="is-flex is-justify-content-space-around is-align-items-center">
         <div id="headerLeft">
             <!-- SOLAR ICON -->
             <i class="fas fa-sun fa-3x icon-style"></i>
         </div>
         <div id="headerCenter">
-          <p class="has-text-centered is-size-2 mx-6">Chasing the <span id="golden">Golden</span> Hours</p>
+          <p class="has-text-centered is-size-2 mx-4">Chasing the <span id="golden">Golden</span> Hours</p>
         </div>
         <div id="headerRight">
-            <label for="theme-switcher">Dark Mode</label>
-            <input type="checkbox" id="theme-switcher">
+            <label id="dark-mode-switch" for="theme-switcher">Light/Dark Mode</label>
+            <input id="theme-switcher" type="checkbox" hidden>
         </div>
       </div>
       <!-- SUBTITLE AREA -->
@@ -119,9 +119,9 @@
     <!-- SEARCH HISTORY SECTION AREA -->
     <section class="search-history-section">
         <div>
-            <h3 class="is-size-4">Previous Searches:</h3>
+            <h3 class="is-size-4 has-text-centered my-4">Previous Searches:</h3>
             <ul>
-                <div class="search-history-list"></div>
+                <div class="search-history-list my-4"></div>
                 <!-- Search History Item List Will Be Added Here with Previous Search from Local Storage -->
             </ul>
         </div>

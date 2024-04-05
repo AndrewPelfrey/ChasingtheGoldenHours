@@ -78,7 +78,7 @@ a:hover {
 
 /* DARK MODE HEADER BUTTON STYLES */
 #headerRight {
-    margin: 10px;
+    margin: auto 0;
     padding: 10px;
     font-size: 22px;
     font-weight: 700;
@@ -86,6 +86,15 @@ a:hover {
     background-color: var(--primary);
     color: var(--white);
     border-radius: 15px;
+    cursor: pointer;
+}
+
+#headerRight:hover {
+    box-shadow: 0px 4px 8px 5px rgba(0, 0, 0, 0.3);
+}
+
+#dark-mode-switch {
+    cursor: pointer;
 }
 
 /* HEADER CONTAINER STYLES */
@@ -139,6 +148,8 @@ aside {
     padding-right: 20px;
     background-color: var(--alloy-orange);
     text-align: center;
+    border: 3px solid var(--rich-black);
+    box-shadow: 0px 4px 8px 5px rgba(0, 0, 0, 0.3);
     border-radius: 15px;
 }
 
@@ -171,6 +182,7 @@ aside {
 
 #submit:hover {
     background-color: var(--secondary);
+    box-shadow: 0px 4px 8px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* MAIN CONTENT AREA WITH SUNSET CONTAINERS AND INFO */
@@ -199,6 +211,24 @@ main {
     border-radius: 5px;
 }
 
+/* WEATHER DISPLAY STYLES */
+.card{
+    margin: 10px;
+    border: 3px solid var(--rich-black);
+    box-shadow: 0px 4px 8px 5px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    margin: 10px;
+    padding: 10px;
+}
+
+.card-para {
+    margin: 10px;
+    padding: 10px;
+    font-size: 22px;
+}
+
 /* MODAL STYLES */
 #modal-paragraph {
     font-weight: 700;
@@ -209,6 +239,9 @@ main {
 #map {
     height: 310px;
     width: 100%;
+    border-radius: 5px;
+    border: 3px solid var(--rich-black);
+    box-shadow: 0px 4px 8px 5px rgba(0, 0, 0, 0.3);
   }
 
 /* FOOTER STYLES */
@@ -223,16 +256,21 @@ main {
 .search-history-section ul li {
     display: inline;
     list-style: none;
-    padding: 10px;
-    margin: 30px;
-    border-bottom: 1px solid #ccc;
     cursor: pointer;
+    margin: 20px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 700;
+    border: 3px solid var(--rich-black);
+    background-color: var(--primary);
+    color: var(--white);
+    border-radius: 15px;
  }
  
  .search-history-section ul li:hover {
-    background-color: #f0f0f0;
+    background-color: var(--secondary);
+    box-shadow: 0px 4px 8px 5px rgba(0, 0, 0, 0.3);
  }
- 
  
 
 /* RESPONSIVE STYLES */
@@ -255,6 +293,11 @@ main {
 @media screen and (max-width: 768px) {
     #footerDiv {
         display: flex;
+        flex-flow: column wrap;
+        text-align: center;
+    }
+
+    #headerDiv {
         flex-flow: column wrap;
         text-align: center;
     }

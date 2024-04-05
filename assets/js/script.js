@@ -185,8 +185,6 @@ console.log(tSunset);
 
 // FUNCTION TO FETCH SUNSET WEATHER DATA
 function fetchWeatherData(destinationLatitude, destinationLongitude, cityInputVal) {
-    
-    // Correct Version for Final Use
     const lat = destinationLatitude;
     const lon = destinationLongitude;
 
@@ -238,21 +236,25 @@ function renderResults(resultObj) {
 
     const resultHeader = document.createElement('h3');
     resultHeader.classList.add('card-header');
-    resultHeader.innerHTML = `Todays Weather ${resultObj.city.name} <img src="http://openweathermap.org/img/w/${icon}.png" alt="img"></img>`;
+    resultHeader.innerHTML = `Todays Weather ${resultObj.city.name} <img src="https://openweathermap.org/img/w/${icon}.png" alt="img"></img>`;
 
-    const dateContentEl = document.createElement('p');
-    dateContentEl.innerHTML = `<strong>Date:</strong> ${resultObj.list[0].dt_txt}`;
+    const weatherContentEl = document.createElement('p');
+    weatherContentEl.classList.add('card-para');
+    weatherContentEl.innerHTML = `<strong>Weather:</strong> ${resultObj.list[0].weather[0].main}`;
 
     const tempContentEl =document.createElement('p');
+    tempContentEl.classList.add('card-para');
     tempContentEl.innerHTML = `<strong>Temp:</strong> ${resultObj.list[0].main.temp} F`;
 
     const humidityContentEl = document.createElement('p');
+    humidityContentEl.classList.add('card-para');
     humidityContentEl.innerHTML = `<strong>Humidity:</strong> ${resultObj.list[0].main.humidity}%`;
 
     const windContentEl = document.createElement('p');
+    windContentEl.classList.add('card-para');
     windContentEl.innerHTML = `<strong>Wind:</strong> ${resultObj.list[0].wind.speed}mph<br/>`;
 
-    resultBody.append(resultHeader, dateContentEl, tempContentEl, humidityContentEl, windContentEl);
+    resultBody.append(resultHeader, weatherContentEl, tempContentEl, humidityContentEl, windContentEl);
 
     // Find existing result card and replace it with the new one
     const existingResultCard = document.querySelector('.card');
@@ -269,22 +271,22 @@ function renderResults(resultObj) {
 // FUNCTION TO SAVE THE SEARCHED CITY TO LOCALSTORAGE
 function saveToLocalStorage(city) {
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
-    // Add the searched city to the search history array
+    // ADD THE SEARCHED CITY TO THE SEARCH HISTORY ARRAY
     searchHistory.push(city);
 
     // CREATED BY CHATGPT: Keep only the last 4 entries in the search history array
     if (searchHistory.length > 4) {
         searchHistory = searchHistory.slice(-4);
     }
-    // Save the updated search history array back to localStorage
+    // SAVE THE UPDATED SEARCH HISTORY ARRAY BACK TO LOCALSTORAGE
     localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
 }
 
-// Function to display search history from localStorage
+// FUNCTION TO DISPLAY SEARCH HISTORY FROM LOCALSTORAGE
 function displaySearchHistory() {
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
 
-    // Clear the existing search history displayed on the page
+    // CLEAR THE EXISTING SEARCH HISTORY DISPLAYED ON THE PAGE
     searchHistoryEl.innerHTML = '';
 
     // MAKING THE LOCATIONS UNIQUE

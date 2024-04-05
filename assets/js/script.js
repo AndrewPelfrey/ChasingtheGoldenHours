@@ -47,21 +47,27 @@ function calcRoute(event) {
   directionsService.route(request, (result, status) => {
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(result);
-      
-      // getting the long, lat and time from the calcRoute array 
+       
       destinationLatitude = result.routes[0].legs[0].end_location.lat();
       destinationLongitude = result.routes[0].legs[0].end_location.lng();
       time = result.routes[0].legs[0].duration.text;
 
-      // display travel time on the webpage
+      // DISPLAY TRAVEL TIME
     const travelTimeElement = document.getElementById("travel-time");
     travelTimeElement.innerHTML = `<h3>Travel Time: ${time}</h3>`;
+
+    const latitude = destinationLatitude;
+    const longitude = destinationLongitude;
+
       
       // console logging the dest long, lat and time for other API 
       console.log(destinationLatitude);
       console.log(destinationLongitude);
       console.log(time);
       console.log(result);
+
+    getSunsetTime(latitude, longitude);
+    displayTomorrowsSunset(latitude, longitude);
 
     // FUNCTION TO HANDLE FORM SUBMISSION AND LOCATION SEARCH
       let cityInputVal = result.routes[0].legs[0].end_address;
@@ -77,7 +83,7 @@ function calcRoute(event) {
 });
 }
 
-// JS for Bulma Modal
+// JS FOR BULMA MODAL
 const openModalButton = document.getElementById('openModal');
 const closeModalButton = document.getElementById('closeModal');
 const modal = document.getElementById('myModal');
@@ -91,7 +97,16 @@ closeModalButton.addEventListener('click', function() {
   });
 
 // FUNCTION TO DISPLAY CURRENT SUNSET TIMES
-function getSunsetTime(latitude, longitude, date) {
+function getSunsetTime(latitude, longitude) {
+
+    const currentDate = new Date();
+
+    // FORMAT THE DATE TO YYYY-MM-DD
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Adding 1 because month is zero-indexed
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const date = `${year}-${month}-${day}`;
+
   const apiUrl = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=${date}&formatted=0`;
 
   fetch(apiUrl)
@@ -124,15 +139,19 @@ function getSunsetTime(latitude, longitude, date) {
       .catch(error => console.error('Error fetching sunset time:', error));
 }
 
-const latitude = 41.4993; // Latitude of Cleveland
-const longitude = -81.6944; // Longitude of Cleveland
-const date = '2024-04-8'; // Project Due Date
-
-getSunsetTime(latitude, longitude, date);
-
 // FUNCTION TO DISPLAY TOMORROW'S SUNSET TIMES
-function displayTomorrowsSunset(tLatitude, tLongitude, tDate) {
-  const apiUrl = `https://api.sunrise-sunset.org/json?lat=${tLatitude}&lng=${tLongitude}&date=${tDate}&formatted=0`;
+function displayTomorrowsSunset(latitude, longitude) {
+
+    const tomorrowDate = new Date();
+    tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+
+    // FORMAT THE DATE TO YYYY-MM-DD
+    const year = tomorrowDate.getFullYear();
+    const month = String(tomorrowDate.getMonth() + 1).padStart(2, '0');
+    const day = String(tomorrowDate.getDate()).padStart(2, '0');
+    const tDate = `${year}-${month}-${day}`;
+
+  const apiUrl = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=${tDate}&formatted=0`;
 
   fetch(apiUrl)
       .then(response => response.json())
@@ -163,12 +182,6 @@ console.log(tSunset);
       })
       .catch(error => console.error('Error fetching sunset time:', error));
 }
-
-const tLatitude = 41.4993; // Latitude of Tomorrow Location
-const tLongitude = -81.6944; // Longitude of Tomorrow Location
-const tDate = '2024-04-9'; // Tomorrow
-
-displayTomorrowsSunset(tLatitude, tLongitude, tDate);
 
 // FUNCTION TO FETCH SUNSET WEATHER DATA
 function fetchWeatherData(destinationLatitude, destinationLongitude, cityInputVal) {

@@ -59,12 +59,6 @@ function calcRoute(event) {
     const latitude = destinationLatitude;
     const longitude = destinationLongitude;
 
-      
-      // console logging the dest long, lat and time for other API 
-      console.log(destinationLatitude);
-      console.log(destinationLongitude);
-      console.log(time);
-      console.log(result);
 
     getSunsetTime(latitude, longitude);
     displayTomorrowsSunset(latitude, longitude);
@@ -212,7 +206,6 @@ function fetchWeatherData(destinationLatitude, destinationLongitude, cityInputVa
         })
     
         .catch(function (error) {
-            console.log(error);
             alert('Error fetching weather data:', error);
         });
     
@@ -220,7 +213,6 @@ function fetchWeatherData(destinationLatitude, destinationLongitude, cityInputVa
 
 // FUNCTION TO PRINT THE CURRENT WEATHER RESULTS TO THE PAGE
 function renderResults(resultObj) {
-    console.log(resultObj);
 
     // UPDATE THE UI DYNAMICALLY WITH THE RETRIEVED WEATHER DATA
     const resultCard = document.createElement('div');
@@ -260,7 +252,6 @@ function renderResults(resultObj) {
         existingResultCard.replaceWith(resultCard);
     } else {
         // IF THERE'S NO EXISTING RESULT CARD, JUST APPEND THE NEW ONE
-        console.log(currentWeatherEl);
         currentWeatherEl.appendChild(resultCard);
     }
 }

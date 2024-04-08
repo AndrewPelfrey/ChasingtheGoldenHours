@@ -24,11 +24,24 @@ AS A sunset photographer, I WANT to see the sunset time for multiple cities with
 
 Starting off with this user story and acceptance criteria gave us a clear path to what needed to be done to get this project completed to all of our standards. 
 
+## Installation
+To install this repo, simply copy the repo and use git clone in your command line along with the copied repo url with your preferred method.
+
+```bash
+git clone git@github.com:andrewpelfrey/ChasingtheGoldenHours.git
+```
+
 ## Technologies
 We used many different technologies to accomplish our final product. We used the CSS framework Bulma, we used jQuery, jQuery UI, dayJS, Google API, Sunrise Sunset API, and notion. 
 
 ## link to deployed page
-https://andrewpelfrey.github.io/ChasingtheGoldenHours/
+[Chasing the GOLDEN Hours] https://andrewpelfrey.github.io/ChasingtheGoldenHours/
 
 ## Image of deployed page
+![CHasing the GOLDEN Hours Example Image](./assets/images/golden-hours.png)
 
+## Credits
+ChatGPT helped in splicing recent search to limit it for the last 4 only.
+
+## License
+Source code is licensed under the MIT license.

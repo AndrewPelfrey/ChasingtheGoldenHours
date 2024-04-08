@@ -194,7 +194,7 @@ function fetchWeatherData(destinationLatitude, destinationLongitude, cityInputVa
         lon: destinationLongitude,
     }
 
-    // Using latitude and longitude to get forcast data
+    // USING LATITUDE AND LONGITUDE TO GET FORECAST DATA
     let openForecastQueryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=289d20f1ae5e1a64488055403d91c79b&units=imperial`
 
     fetch(openForecastQueryURL)
@@ -207,10 +207,8 @@ function fetchWeatherData(destinationLatitude, destinationLongitude, cityInputVa
     
         .then(function (forecastData) {
             renderResults(forecastData); // Calls function to display current weather
-            // Save to localStorage
-            saveToLocalStorage(cityObj);
-            // Update search history display
-            displaySearchHistory();
+            saveToLocalStorage(cityObj); // Save to localStorage
+            displaySearchHistory(); // Update search history display
         })
     
         .catch(function (error) {
@@ -224,7 +222,7 @@ function fetchWeatherData(destinationLatitude, destinationLongitude, cityInputVa
 function renderResults(resultObj) {
     console.log(resultObj);
 
-    // Update the UI dynamically with the retrieved weather data.
+    // UPDATE THE UI DYNAMICALLY WITH THE RETRIEVED WEATHER DATA
     const resultCard = document.createElement('div');
     resultCard.classList.add('card');
 
@@ -256,12 +254,12 @@ function renderResults(resultObj) {
 
     resultBody.append(resultHeader, weatherContentEl, tempContentEl, humidityContentEl, windContentEl);
 
-    // Find existing result card and replace it with the new one
+    // FIND EXISTING RESULT CARD AND REPLACE IT WITH THE NEW ONE
     const existingResultCard = document.querySelector('.card');
     if (existingResultCard) {
         existingResultCard.replaceWith(resultCard);
     } else {
-        // If there's no existing result card, just append the new one
+        // IF THERE'S NO EXISTING RESULT CARD, JUST APPEND THE NEW ONE
         console.log(currentWeatherEl);
         currentWeatherEl.appendChild(resultCard);
     }
@@ -338,8 +336,9 @@ $(document).ready(function() {
         event.preventDefault(); // Prevent form submission
         calcRoute(); // CALL FUNCTION TO CALCULATE DIRECTION AND CURRENT WEATHER
     });
-    localStorage.removeItem(`searchHistory`);
 
     initMap(); // CALLS THE MAP FUNCTION ON PAGE LOAD
+
+    displaySearchHistory(); // CALLS THE DISPLAY SEARCH HISTORY FUNCTION ON PAGE LOAD
 });
 

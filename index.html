@@ -27,7 +27,7 @@
             <i class="fas fa-sun fa-3x icon-style"></i>
         </div>
         <div id="headerCenter">
-          <p class="has-text-centered is-size-2 mx-4">Chasing the <span id="golden">Golden</span> Hours</p>
+          <h1 class="has-text-weight-bold has-text-centered is-size-2 mx-4">Chasing the <span id="golden">Golden</span> Hours</h1>
         </div>
         <div id="headerRight">
             <label id="dark-mode-switch" for="theme-switcher">Light/Dark Mode</label>
@@ -36,7 +36,7 @@
       </div>
       <!-- SUBTITLE AREA -->
         <div class="subtitle">
-            <h2>Your go-to web app for sunset enthusiasts and photographers.</h2>
+            <h2 class="has-text-weight-bold is-size-4">Your go-to web app for sunset enthusiasts and photographers.</h2>
         </div>
     </header>
 
@@ -63,11 +63,11 @@
                 </div><br>
             
                 <!-- FORM FOR USER INPUT OF CURRENT AND DESIRED LOCATION FOR SUNSET ANALYSIS -->
-                <form id="location-form">
-                    <label for="current-location-input">Current Location:</label>
+                <form class="my-4" id="location-form">
+                    <label class="is-flex is-justify-content-space-around is-align-items-center has-text-weight-bold" for="current-location-input">Current Location:</label>
                     <input type="text" id="current-location-input" autocomplete="off" required>
                     <br>
-                    <label for="desired-location-input">Desired Location:</label>
+                    <label class="is-flex is-justify-content-space-around is-align-items-center has-text-weight-bold" for="desired-location-input">Desired Location:</label>
                     <input type="text" id="desired-location-input" autocomplete="off" required>
                     <button id="submit" type="submit">Submit Button</button>
                 </form>
@@ -87,7 +87,7 @@
             <div id="dusk-time" class="column box-container">
                 <h3>Dusk Time:</h3>
             </div>
-            <div id="golden-time" class="box-container">
+            <div id="golden-time" class="column box-container">
                 <h3>Golden Time:</h3>
             </div>
             <div>
@@ -105,7 +105,7 @@
                 <div id="tom-dusk-time" class="column box-container">
                     <h3>Dusk Time:</h3>
                 </div>
-                <div id="tom-golden-time" class="box-container">
+                <div id="tom-golden-time" class="column box-container">
                     <h3>Golden Time:</h3>
                 </div>
             <!-- TODAYS WEATHER AREA -->

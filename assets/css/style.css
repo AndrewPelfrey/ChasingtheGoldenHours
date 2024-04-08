@@ -47,7 +47,6 @@
 h1, h2 {
     margin: 5px;
     padding: 10px;
-    font-size: 22px;
     font-weight: 700;
 }
 
@@ -276,7 +275,11 @@ main {
 /* RESPONSIVE STYLES */
 /* Small Desktops Responsive Settings */
 @media screen and (max-width: 1200px) {
-    
+    .search-history-section ul li {
+        display: flex;
+        flex-flow: column wrap;
+        text-align: center;
+    }
   }
 
 /* Tablets Responsive Settings */
@@ -291,12 +294,6 @@ main {
 
 /* Mobile Phones Responsive Settings */
 @media screen and (max-width: 768px) {
-    #footerDiv {
-        display: flex;
-        flex-flow: column wrap;
-        text-align: center;
-    }
-
     #headerDiv {
         flex-flow: column wrap;
         text-align: center;
